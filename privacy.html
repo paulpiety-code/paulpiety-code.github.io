@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="CORE2 Drive Backup - tietosuojaseloste ja Google Drive API -tietojen käyttö.">
+  <title>Tietosuojaseloste | CORE2 Drive Backup</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--surface:#141c30;--text:#ecf1fa;--muted:#b0c0d2;--border:#2c3a50;--accent:#93c5fd}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{width:min(100% - 40px,790px);margin:auto}header{border-bottom:1px solid var(--border);padding:20px 0}
+    header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    .logo{font-weight:750}a{color:var(--accent)}nav a{margin-left:18px;font-size:.92rem;text-decoration:none}
+    nav a:hover{text-decoration:underline}main{padding:55px 0 80px}h1{font-size:clamp(2.1rem,5vw,3.1rem);letter-spacing:-.035em;line-height:1.15}
+    h2{font-size:1.25rem;margin:34px 0 10px}p,li{color:var(--muted)}ul{padding-left:22px}li{margin:5px 0}
+    .notice{background:var(--surface);padding:18px 22px;border:1px solid var(--border);border-radius:12px}
+    footer{border-top:1px solid var(--border);padding:22px 0 35px;color:var(--muted);font-size:.9rem}
+  </style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo">CORE2 Drive Backup</div><nav aria-label="Sivuston navigaatio"><a href="/">Etusivu</a><a aria-current="page" href="/privacy.html">Tietosuojaseloste</a></nav></div></header>
+<main class="wrap">
+  <h1>Tietosuojaseloste</h1>
+  <p>Päivitetty 10.10.2026. Tämä seloste koskee henkilökohtaista CORE2 Drive Backup -varmuuskopiointityökalua ja sen Google Drive -rajapinnan käyttöä.</p>
+  <div class="notice">CORE2 Drive Backup on tarkoitettu ainoastaan sovelluksen omistajan omaan varmuuskopiointiin, ei ulkopuolisille käyttäjille tarjottavaksi palveluksi.</div>
+  <h2>1. Sovelluksen tarkoitus</h2>
+  <p>Sovellus kopioi omistajan Railway-palvelussa sijaitsevien SQLite-tutkimustietokantojen yhtenäisiä varmuuskopioita omistajan Google Drive -tilille. GitHub Actions suorittaa ajastetun työnkulun ja rclone siirtää tiedostot OAuth-valtuutuksen avulla.</p>
+  <h2>2. Käsiteltävät tiedot ja Google API -käyttö</h2>
+  <p>Google Drive API -käyttöoikeus on tarkoitettu varmuuskopiotiedostojen luomiseen ja siirtämiseen valittuun Drive-kansioon, tiedostojen olemassaolon ja tarkisteiden tarkistamiseen sekä siirron onnistumisen varmistamiseen. Käyttöoikeuden tekninen laajuus voi antaa rclone-ohjelmalle mahdollisuuden käsitellä myös muita Google Drive -tiedostoja, vaikka nykyinen työnkulku käyttää vain varmuuskopiokansiota.</p>
+  <p>Työnkulku käsittelee SQLite-varmuuskopiotiedostoja, tiedostonimiä, teknisiä tarkisteita, ajonaikaista tilatietoa ja toimintaan tarvittavia OAuth-valtuutustietoja. Sitä ei ole suunniteltu lukemaan sähköposteja, yhteystietoja tai selaushistoriaa.</p>
+  <h2>3. Tiedon käyttö ja jakaminen</h2>
+  <p>Tietoja käytetään vain varmuuskopiointiin, palautettavuuden tukemiseen ja siirron eheyden tarkistamiseen. Tietoja ei myydä, luovuteta mainostajille tai käytetä kohdennettuun mainontaan. Tietoja voivat teknisesti käsitellä palveluntarjoajat Google Drive, GitHub Actions ja Railway niiden omien palveluehtojen ja tietosuojakäytäntöjen mukaisesti.</p>
+  <h2>4. Tallennus ja säilytysaika</h2>
+  <p>Varmuuskopiot säilytetään käyttäjän omassa, käyttöoikeuksiltaan yksityisessä Google Drive -kansiossa, kunnes käyttäjä poistaa ne. GitHub Actions käyttää ajon aikaista väliaikaista tallennustilaa; epäonnistuneen siirron yhteydessä valmis varmuuskopio voidaan tallentaa GitHubin hätäartefaktiksi enintään seitsemäksi päiväksi. Työnkulun lokit voivat sisältää ei-salaisia tiedostonimiä, tietokantarivien lukumääriä ja tarkisteita. Julkiselle GitHub Pages -sivustolle ei tallenneta varmuuskopioita.</p>
+  <h2>5. Turvallisuus</h2>
+  <p>OAuth-valtuutustiedot ja Railway-tunnukset on tarkoitus säilyttää GitHub Actionsin salattuina salaisuuksina, ei julkisen repositorion lähdekoodissa. Varmuuskopioiden eheys tarkistetaan SQLite-tietokannan tarkistuksella sekä tiedostotarkisteilla. Kaikki ulkoiset palvelut muodostavat omat tietoturvariskinsä, eikä täydellistä riskittömyyttä voida luvata.</p>
+  <h2>6. Käyttöoikeuden peruuttaminen ja tietojen poistaminen</h2>
+  <p>Omistaja voi peruuttaa sovelluksen Google Drive -käyttöoikeuden Google-tilin turvallisuusasetusten kautta sekä poistaa OAuth-tunnuksen Google Cloudista ja GitHub Actionsin salatuista asetuksista. Käyttäjä voi poistaa varmuuskopiot suoraan Google Drivestä. Käyttöoikeuden peruuttaminen ei automaattisesti poista aiemmin luotuja varmuuskopioita.</p>
+  <h2>7. Google API Services User Data Policy</h2>
+  <p>Google API:n kautta saatujen käyttäjätietojen käyttö ja mahdollinen siirtäminen toisiin sovelluksiin noudattavat <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a> -käytäntöä, mukaan lukien Limited Use -vaatimukset. Tietoja käytetään vain käyttäjän nimenomaisesti sallimaan varmuuskopiointitoimintoon.</p>
+  <h2>8. Yhteydenotto</h2>
+  <p>Kyseessä on henkilökohtainen ei-kaupallinen sovellus. Yhteydenotto tapahtuu Google OAuth -suostumusnäytössä ilmoitettuun käyttäjätuen sähköpostiosoitteeseen.</p>
+</main>
+<footer><div class="wrap"><a href="/">CORE2 Drive Backup – Etusivu</a></div></footer>
+</body>
+</html>
